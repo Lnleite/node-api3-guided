@@ -15,7 +15,7 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.get("/:id", checkHubId, (req, res, next) => {
+router.get("/:id", checkHubId, (req, res) => {
   res.json(req.hub);
 });
 

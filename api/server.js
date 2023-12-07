@@ -9,9 +9,9 @@ function customMorgan(req, res, next) {
   next();
 }
 
-function shortCircuit(req, res, next) {
-  res.json("the request was short circuited!");
-}
+// function shortCircuit(req, res, next) {
+//   res.json("the request was short circuited!");
+// }
 
 function addFriend(req, res, next) {
   req.friend = "Lady Gaga";
