@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { checkHubId } = require("./hubs-middleware.js");
+const { checkHubId, checkNewHub } = require("./hubs-middleware.js");
 const Hubs = require("./hubs-model.js");
 const Messages = require("../messages/messages-model.js");
 
@@ -19,7 +19,7 @@ router.get("/:id", checkHubId, (req, res, next) => {
   res.json(req.hub);
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", checkNewHub, (req, res, next) => {
   Hubs.add(req.body)
     .then((hub) => {
       res.status(201).json(hub);
@@ -35,7 +35,7 @@ router.delete("/:id", checkHubId, (req, res, next) => {
     .catch(next);
 });
 
-router.put("/:id", checkHubId, (req, res, next) => {
+router.put("/:id", [checkHubId, checkNewHub], (req, res, next) => {
   Hubs.update(req.params.id, req.body)
     .then((hub) => {
       res.status(200).json(hub);
